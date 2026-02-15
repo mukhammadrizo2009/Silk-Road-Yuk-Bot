@@ -10,7 +10,7 @@ def send_menu(update: Update , context: CallbackContext):
         text = "Bosh Sahifa ro'yhati! 📝",
         reply_markup = ReplyKeyboardMarkup(
             keyboard=[
-                [KeyboardButton("⭐️ Stars olish"), KeyboardButton("Hisobni to'dirish💰")],
+                [KeyboardButton("📦 E'lon berish")],
                 [KeyboardButton("Profilim 👤") , KeyboardButton("Taklif-Mulohazalar-Yordam💡")]
             ],
             one_time_keyboard=True,
@@ -30,7 +30,7 @@ def user_already_register(update: Update , context: CallbackContext):
         parse_mode = "markdown",
         reply_markup = ReplyKeyboardMarkup(
             keyboard=[
-                [KeyboardButton("⭐️ Stars olish"), KeyboardButton("Hisobni to'dirish💰")],
+                [KeyboardButton("📦 E'lon berish")],
                 [KeyboardButton("Profilim 👤") , KeyboardButton("Taklif-Mulohazalar-Yordam💡")]
             ],
             one_time_keyboard=True,

@@ -13,8 +13,20 @@ class Config:
 
 class RegisterStates():
     NAME = 0
-    PHONE_NUMBER =1
-    CONFIRM = 2 
+    PHONE_NUMBER = 1
+    CONFIRM = 2
+    
+class Post():
+    FROM = 0
+    TO = 1
+    TYPE = 2
+    WEIGHT = 3
+    VOLUME = 4
+    DATE = 5
+    PRICE = 6
+    PHONE = 7
+    COMMENT = 8
     
 config = Config()
 register_states = RegisterStates()
+post = Post()

@@ -1,10 +1,11 @@
 from telegram import Update , ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
 from telegram.ext import CallbackContext
-from config.database import LocalSession
+
 from config.models import User
-from .menu import send_menu
-from .menu import user_already_register
+from config.database import LocalSession, Base
 from config.config import register_states
+
+from .menu import user_already_register, send_menu
 
 def check_register(update: Update , context: CallbackContext):
     user = update.effective_user

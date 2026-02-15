@@ -5,6 +5,7 @@ from config.database import Base, engine
 
 from apps.start import start
 from apps.register import check_register
+from apps.conversation import Register, Post
 
 Base.metadata.create_all(bind=engine)
 
@@ -18,6 +19,9 @@ def main() -> None:
     
     dispatcher.add_handler(MessageHandler(Filters.text("Shaxsingizni tasdiqlang! 🪪"), check_register))
     dispatcher.add_handler(MessageHandler(Filters.text("Ro'yhatdan o'tganman!✅"), check_register))
+    
+    dispatcher.add_handler(Register.register_conversation_handler)
+    dispatcher.add_handler(Post.cargo_conv)
     
     
     updater.start_polling()
