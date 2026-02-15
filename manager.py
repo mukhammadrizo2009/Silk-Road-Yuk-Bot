@@ -2,14 +2,14 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 from config.config import config
 from config.database import Base, engine
+from config.models import User
 
 from apps.start import start, help, send_idea
 from apps.menu import send_menu
 from apps.profile import profile
 from apps.register import check_register
 from apps.conversation import Register, Post
-from config.database import engine, Base
-from config.models import User
+
 
 Base.metadata.create_all(bind=engine)
 
