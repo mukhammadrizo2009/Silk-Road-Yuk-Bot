@@ -9,5 +9,6 @@ engine = create_engine(
     connect_args={"check_same_thread": False} 
 )
 
+
 Base = declarative_base()
 LocalSession = sessionmaker(bind=engine, autoflush=True, autocommit=False)
