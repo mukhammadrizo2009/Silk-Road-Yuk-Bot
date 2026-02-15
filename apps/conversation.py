@@ -3,7 +3,7 @@ from telegram.ext import MessageHandler, ConversationHandler, Filters, CommandHa
 from config.config import register_states, post
 
 from apps.register import get_name, set_name, set_phone, save_user
-from apps.cargo import start_cargo, get_from, get_type, get_to, get_weight, get_volume, get_date, get_price, get_phone, finish, cancel
+from apps.cargo import start_cargo, get_from, get_type, get_to, get_weight, get_volume, get_date, get_price, get_phone, finish, cancel, skip_comment, manual_date
 
 class Register():
     register_conversation_handler = ConversationHandler(
@@ -20,19 +20,24 @@ class Register():
     fallbacks = []
     )
     
-class Post():
+from telegram.ext import ConversationHandler, MessageHandler, Filters, CommandHandler, CallbackQueryHandler
+
+class Post:
     cargo_conv = ConversationHandler(
-        entry_points=[MessageHandler(Filters.regex("^📦 E'lon berish$"), start_cargo)],
-        states={
-            post.FROM: [MessageHandler(Filters.text & ~Filters.command, get_from)],
-            post.TO: [MessageHandler(Filters.text & ~Filters.command, get_to)],
-            post.TYPE: [MessageHandler(Filters.text & ~Filters.command, get_type)],
-            post.WEIGHT: [MessageHandler(Filters.text & ~Filters.command, get_weight)],
-            post.VOLUME: [MessageHandler(Filters.text & ~Filters.command, get_volume)],
-            post.DATE: [MessageHandler(Filters.text & ~Filters.command, get_date)],
-            post.PRICE: [MessageHandler(Filters.text & ~Filters.command, get_price)],
-            post.PHONE: [MessageHandler(Filters.text & ~Filters.command, get_phone)],
-            post.COMMENT: [MessageHandler(Filters.text & ~Filters.command, finish)],
+        entry_points=[
+            MessageHandler(Filters.regex("^📦 E'lon berish$"), start_cargo)
+        ],
+        states={post.FROM: [CallbackQueryHandler(get_from)],
+        post.TO: [CallbackQueryHandler(get_to)],
+        post.TYPE: [MessageHandler(Filters.text & ~Filters.command, get_type)],
+        post.WEIGHT: [MessageHandler(Filters.text & ~Filters.command, get_weight)],
+        post.VOLUME: [MessageHandler(Filters.text & ~Filters.command, get_volume)],
+        post.DATE: [CallbackQueryHandler(get_date),MessageHandler(Filters.text & ~Filters.command, manual_date)],
+        post.PRICE: [MessageHandler(Filters.text & ~Filters.command, get_price)],
+        post.PHONE: [MessageHandler(Filters.text & ~Filters.command, get_phone)],
+        post.COMMENT: [CallbackQueryHandler(skip_comment, pattern="^skip_comment$"),MessageHandler(Filters.text & ~Filters.command, finish)],
         },
+        
         fallbacks=[CommandHandler("cancel", cancel)],
-    )
+        allow_reentry=True 
+        )

@@ -10,6 +10,7 @@ class Config:
     DB_USER = os.getenv("DB_USER")
     DB_PASSWORD = os.getenv("DB_PASSWORD")
     DB_NAME = os.getenv("DB_NAME")
+    SUPERGROUP_ID = os.getenv("GROUP_ID")
 
 class RegisterStates():
     NAME = 0
@@ -26,6 +27,12 @@ class Post():
     PRICE = 6
     PHONE = 7
     COMMENT = 8
+    
+REGIONS = [
+    "Toshkent", "Andijon", "Namangan", "Farg‘ona",
+    "Samarqand", "Buxoro", "Navoiy", "Qashqadaryo",
+    "Surxondaryo", "Xorazm", "Jizzax", "Sirdaryo"
+]
     
 config = Config()
 register_states = RegisterStates()
