@@ -38,7 +38,6 @@ class Post:
         post.COMMENT: [CallbackQueryHandler(skip_comment, pattern="^skip_comment$"),MessageHandler(Filters.text & ~Filters.command, finish)],
         post.CONFIRM: [MessageHandler(Filters.regex("📤 Guruhga yuborish"), send_to_group),MessageHandler(Filters.regex("❌ Bekor qilish"), cancel)],
         },
-        
-        fallbacks=[CommandHandler("cancel", cancel)],
+        fallbacks=[],
         allow_reentry=True 
         )
