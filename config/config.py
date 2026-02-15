@@ -12,10 +12,12 @@ class Config:
     DB_NAME = os.getenv("DB_NAME")
     SUPERGROUP_ID = os.getenv("GROUP_ID")
 
+
 class RegisterStates():
     NAME = 0
     PHONE_NUMBER = 1
     CONFIRM = 2
+    
     
 class Post():
     FROM = 0
@@ -29,11 +31,13 @@ class Post():
     COMMENT = 8
     CONFIRM = 9
     
+    
 REGIONS = [
     "Toshkent", "Andijon", "Namangan", "Fargona",
     "Samarqand", "Buxoro", "Navoiy", "Qashqadaryo",
     "Surxondaryo", "Xorazm", "Jizzax", "Qaroqalpoqiston"
 ]
+
 
 CITY_TOPICS = {
     "TOSHKENT": int(os.getenv("TOSHKENT")),
@@ -49,6 +53,7 @@ CITY_TOPICS = {
     "QASHQADARYO": int(os.getenv("QASHQADARYO")),
     "XORAZM": int(os.getenv("XORAZM")),
 }
+
 
 config = Config()
 register_states = RegisterStates()
