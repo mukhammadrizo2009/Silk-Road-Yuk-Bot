@@ -250,13 +250,12 @@ def send_to_group(update: Update, context: CallbackContext):
     topics = set()
 
     from_city = data.get("from", "").upper()
-    to_city = data.get("to", "").upper()
+
 
     if from_city in CITY_TOPICS:
         topics.add(CITY_TOPICS[from_city])
 
-    if to_city in CITY_TOPICS:
-        topics.add(CITY_TOPICS[to_city])
+
 
     for topic_id in topics:
         context.bot.send_message(
