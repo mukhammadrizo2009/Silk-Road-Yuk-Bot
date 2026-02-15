@@ -1,7 +1,6 @@
 from telegram import Update, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CallbackContext
 from telegram.utils.helpers import escape_markdown
-from config.config import config
 
 
 def start(update: Update, context: CallbackContext):
@@ -30,9 +29,7 @@ def start(update: Update, context: CallbackContext):
 
 def help(update: Update, context: CallbackContext):
     bot = context.bot
-    user = update.effective_user  # _effective_user emas, effective_user ishlatiladi
-
-    # Inline tugma yaratish
+    user = update.effective_user 
     keyboard = InlineKeyboardMarkup([
         [InlineKeyboardButton("📞 Admin bilan bog'lanish", url="https://t.me/karimov_22222")]
     ])
