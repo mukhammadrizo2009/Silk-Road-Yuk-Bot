@@ -3,7 +3,9 @@ from .database import Base
 import datetime
 
 class User(Base):
+    
     __tablename__ = "users"
+    
     id = Column(Integer, primary_key=True, autoincrement=True)
     telegram_id = Column(Integer, unique=True, nullable=False)
     name = Column(String, nullable=False)
