@@ -27,11 +27,12 @@ class Post():
     PRICE = 6
     PHONE = 7
     COMMENT = 8
+    CONFIRM = 9
     
 REGIONS = [
-    "Toshkent", "Andijon", "Namangan", "Farg‘ona",
+    "Toshkent", "Andijon", "Namangan", "Fargona",
     "Samarqand", "Buxoro", "Navoiy", "Qashqadaryo",
-    "Surxondaryo", "Xorazm", "Jizzax", "Sirdaryo"
+    "Surxondaryo", "Xorazm", "Jizzax", "Qaroqalpoqiston"
 ]
 
 CITY_TOPICS = {
@@ -40,15 +41,15 @@ CITY_TOPICS = {
     "SAMARQAND": int(os.getenv("SAMARQAND")),
     "FARGONA": int(os.getenv("FARGONA")),
     "ANDIJON": int(os.getenv("ANDIJON")),
-    "BUHORO": int(os.getenv("BUHORO")),
-    "SURHONDARYO": int(os.getenv("SURHONDARYO")),
+    "BUXORO": int(os.getenv("BUHORO")),
+    "SURXONDARYO": int(os.getenv("SURHONDARYO")),
     "QAROQALPOQISTON": int(os.getenv("QAROQALPOQISTON")),
     "NAVOIY": int(os.getenv("NAVOIY")),
     "JIZZAX": int(os.getenv("JIZZAX")),
     "QASHQADARYO": int(os.getenv("QASHQADARYO")),
     "XORAZM": int(os.getenv("XORAZM")),
 }
-    
+
 config = Config()
 register_states = RegisterStates()
 post = Post()

@@ -1,22 +1,12 @@
-from datetime import datetime
-from sqlalchemy import (
-    Column,
-    BigInteger,
-    String,
-    DateTime,
-    )
+from sqlalchemy import Column, Integer, String, DateTime
 from .database import Base
+import datetime
 
 class User(Base):
     __tablename__ = "users"
-    
-    id = Column(BigInteger, primary_key=True)
-    telegram_id = Column(BigInteger, unique=True, nullable=False)
-    
-    name = Column(String(length=25))
-    phone_number = Column(String(length=13))
-    balance = Column(BigInteger, default=0,)
-    stars = Column(BigInteger, default=0)
-    
-    created_at = Column(DateTime, default=datetime.now)
-    updated_at = Column(DateTime, onupdate=datetime.now)
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    telegram_id = Column(Integer, unique=True, nullable=False)
+    name = Column(String, nullable=False)
+    phone_number = Column(String, nullable=True)
+    created_at = Column(DateTime, default=datetime.datetime.utcnow)
+    updated_at = Column(DateTime, nullable=True)

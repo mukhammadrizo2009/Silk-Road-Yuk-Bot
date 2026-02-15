@@ -4,9 +4,7 @@ from telegram import Update, ReplyKeyboardMarkup, ReplyKeyboardRemove, InlineKey
 from telegram.ext import (
     ConversationHandler, CallbackContext
 )
-from config.config import post
-
-from config.config import REGIONS
+from config.config import post, config, REGIONS, CITY_TOPICS
 
 def start_cargo(update: Update, context: CallbackContext):
     context.user_data.clear()
@@ -86,7 +84,7 @@ def get_type(update: Update, context: CallbackContext):
 
 def get_weight(update: Update, context: CallbackContext):
     context.user_data["weight"] = update.message.text
-    update.message.reply_text("📐 Hajmi (misol: 3-metr)?")
+    update.message.reply_text("🚛 Transport (misol: Labo)?")
     return post.VOLUME
 
 def manual_date(update: Update, context: CallbackContext):
@@ -185,13 +183,15 @@ def skip_comment(update: Update, context: CallbackContext):
 
 # 🟢 Yakunlash
 def finish(update: Update, context: CallbackContext):
-    # Agar foydalanuvchi text yozsa
-    if update.message:
-        comment_text = update.message.text
-    # Agar callback tugmasi bosilgan bo‘lsa
-    elif update.callback_query:
+
+    message = update.effective_message
+    query = update.callback_query
+
+    if query:
+        query.answer()
         comment_text = context.user_data.get("comment", "Yo‘q")
-        update = update.callback_query  # edit_message_text uchun
+    else:
+        comment_text = message.text
 
     context.user_data["comment"] = comment_text
     data = context.user_data
@@ -202,32 +202,77 @@ def finish(update: Update, context: CallbackContext):
 📍 {data['from']} ➡️ {data['to']}
 📦 Yuk turi: {data['type']}
 ⚖️ Og‘irlik: {data['weight']}
-📐 Hajm: {data['volume']}
+🚛 Transport: {data['volume']}
 📅 Sana: {data['date']}
 💰 Narx: {data['price']}
 📞 Telefon: {data['phone']}
 📝 Izoh: {data['comment']}
 """
 
-    # Agar callback bo‘lsa edit_message_text o‘rniga reply_text ishlatish mumkin
-    if update.message:
-        update.message.reply_text(text, parse_mode="Markdown")
-    elif update.callback_query:
-        update.message.reply_text(text, parse_mode="Markdown")
+    keyboard = [
+        ["📤 Guruhga yuborish"],
+        ["❌ Bekor qilish"]
+    ]
 
-    context.user_data.clear()
-
-    keyboard = [["📤 Guruhga yuborish"], ["❌ E'loni bekor qilish"]]
-    # Yakuniy menyu
-    update.message.reply_text(
-        "✅ E'lon qabul qilindi!",
-        reply_markup=ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
+    message.reply_text(
+        text,
+        parse_mode="Markdown",
+        reply_markup=ReplyKeyboardMarkup(keyboard, resize_keyboard=True, one_time_keyboard=True)
     )
 
-    return ConversationHandler.END
+    return post.CONFIRM
+
 
 
 
 def cancel(update: Update, context: CallbackContext):
     update.message.reply_text("❌ Bekor qilindi.")
+    return ConversationHandler.END
+
+
+
+
+def send_to_group(update: Update, context: CallbackContext):
+
+    data = context.user_data
+
+    text = f"""
+📦 *Yangi yuk e’loni*
+
+📍 {data['from']} ➡️ {data['to']}
+📦 Yuk turi: {data['type']}
+⚖️ Og‘irlik: {data['weight']}
+🚛 Transport: {data['volume']}
+📅 Sana: {data['date']}
+💰 Narx: {data['price']}
+📞 Telefon: {data['phone']}
+📝 Izoh: {data['comment']}
+"""
+
+    topics = set()
+
+    from_city = data.get("from", "").upper()
+    to_city = data.get("to", "").upper()
+
+    if from_city in CITY_TOPICS:
+        topics.add(CITY_TOPICS[from_city])
+
+    if to_city in CITY_TOPICS:
+        topics.add(CITY_TOPICS[to_city])
+
+    for topic_id in topics:
+        context.bot.send_message(
+            chat_id=config.SUPERGROUP_ID,
+            text=text,
+            parse_mode="Markdown",
+            message_thread_id=topic_id
+        )
+
+    update.message.reply_text(
+        "✅ E'lon muvaffaqiyatli yuborildi!",
+        reply_markup=ReplyKeyboardRemove()
+    )
+
+    context.user_data.clear()
+
     return ConversationHandler.END

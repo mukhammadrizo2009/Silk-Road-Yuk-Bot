@@ -30,7 +30,7 @@ def user_already_register(update: Update , context: CallbackContext):
         parse_mode = "markdown",
         reply_markup = ReplyKeyboardMarkup(
             keyboard=[
-                [KeyboardButton("📦 E'lon berish")],
+                [KeyboardButton("E'lon berish 📦")],
                 [KeyboardButton("Profilim 👤") , KeyboardButton("Taklif-Mulohazalar-Yordam💡")]
             ],
             one_time_keyboard=True,

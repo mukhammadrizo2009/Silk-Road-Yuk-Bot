@@ -3,7 +3,7 @@ from telegram.ext import MessageHandler, ConversationHandler, Filters, CommandHa
 from config.config import register_states, post
 
 from apps.register import get_name, set_name, set_phone, save_user
-from apps.cargo import start_cargo, get_from, get_type, get_to, get_weight, get_volume, get_date, get_price, get_phone, finish, cancel, skip_comment, manual_date
+from apps.cargo import start_cargo, get_from, get_type, get_to, get_weight, get_volume, get_date, get_price, get_phone, finish, cancel, skip_comment, manual_date, send_to_group
 
 class Register():
     register_conversation_handler = ConversationHandler(
@@ -36,6 +36,7 @@ class Post:
         post.PRICE: [MessageHandler(Filters.text & ~Filters.command, get_price)],
         post.PHONE: [MessageHandler(Filters.text & ~Filters.command, get_phone)],
         post.COMMENT: [CallbackQueryHandler(skip_comment, pattern="^skip_comment$"),MessageHandler(Filters.text & ~Filters.command, finish)],
+        post.CONFIRM: [MessageHandler(Filters.regex("📤 Guruhga yuborish"), send_to_group),MessageHandler(Filters.regex("❌ Bekor qilish"), cancel)],
         },
         
         fallbacks=[CommandHandler("cancel", cancel)],

@@ -26,7 +26,7 @@ def register_message(update: Update, context: CallbackContext):
 
     bot.send_message(
         chat_id=user.id,
-        text="Ro'yhatdan o'tishga xush kelibsiz! 🎯",
+        text="Xush kelibsiz!🎉\n Ro'yhatdan o'tishni boshlash uchun quyidagi tugmani bosing! 🎯",
         reply_markup=ReplyKeyboardMarkup(
             keyboard=[
                 [KeyboardButton("📝 Ro'yhatdan o'tishni boshlash..!")]
@@ -46,7 +46,7 @@ def get_name(update: Update, context: CallbackContext):
         chat_id=user.id,
         text=(
             "Ism va Familiyangizni kiriting 🖊\n\n"
-            "Misol: *Abdulla Abdullayev*"
+            "Misol: *Alijon Valiyev*"
         ),
         parse_mode="markdown",
         reply_markup=ReplyKeyboardRemove()
