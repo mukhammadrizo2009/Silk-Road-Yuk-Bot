@@ -30,3 +30,12 @@ def start(update: Update, context: CallbackContext):
     message_thread_id=None  # topic_id mavjud emas bo‘lsa asosiy chatga
     )
     print(update.message.message_thread_id)
+
+def debug(update: Update, context: CallbackContext):
+    message = update.effective_message
+    
+    print("Chat ID:", update.effective_chat.id)
+    print("Message ID:", message.message_id)
+    print("Thread ID:", message.message_thread_id)
+    
+    message.reply_text(f"Thread ID: {message.message_thread_id}")

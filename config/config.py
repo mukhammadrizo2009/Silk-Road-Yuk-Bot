@@ -33,6 +33,21 @@ REGIONS = [
     "Samarqand", "Buxoro", "Navoiy", "Qashqadaryo",
     "Surxondaryo", "Xorazm", "Jizzax", "Sirdaryo"
 ]
+
+CITY_TOPICS = {
+    "TOSHKENT": int(os.getenv("TOSHKENT")),
+    "NAMANGAN": int(os.getenv("NAMANGAN")),
+    "SAMARQAND": int(os.getenv("SAMARQAND")),
+    "FARGONA": int(os.getenv("FARGONA")),
+    "ANDIJON": int(os.getenv("ANDIJON")),
+    "BUHORO": int(os.getenv("BUHORO")),
+    "SURHONDARYO": int(os.getenv("SURHONDARYO")),
+    "QAROQALPOQISTON": int(os.getenv("QAROQALPOQISTON")),
+    "NAVOIY": int(os.getenv("NAVOIY")),
+    "JIZZAX": int(os.getenv("JIZZAX")),
+    "QASHQADARYO": int(os.getenv("QASHQADARYO")),
+    "XORAZM": int(os.getenv("XORAZM")),
+}
     
 config = Config()
 register_states = RegisterStates()
