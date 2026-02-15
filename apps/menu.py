@@ -1,4 +1,4 @@
-from telegram import Update , ReplyKeyboardMarkup , KeyboardButton , InlineKeyboardButton , InlineKeyboardMarkup
+from telegram import Update , ReplyKeyboardMarkup , KeyboardButton
 from telegram.ext import CallbackContext
 
 def send_menu(update: Update , context: CallbackContext): 
