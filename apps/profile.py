@@ -15,8 +15,8 @@ def profile(update: Update, context: CallbackContext):
         user = db.query(User).filter(User.telegram_id == telegram_id).first()
         
         if user:
-            name = user.name if user.name else "Kiritilmagan"
-            phone_number = user.phone_number if user.phone_number else "Kiritilmagan"
+            name = user.name if user.name else "Kiritilmagansiz"
+            phone_number = user.phone_number if user.phone_number else "Kiritilmagansiz"
             
             profile_text = (
                 "👤 <b>Sizning profilingiz:</b>\n\n"
