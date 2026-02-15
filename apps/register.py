@@ -1,10 +1,10 @@
 from telegram import Update , ReplyKeyboardMarkup, KeyboardButton, ReplyKeyboardRemove
 from telegram.ext import CallbackContext
-from database.database import LocalSession
-from database.models import User
+from config.database import LocalSession
+from config.models import User
 from .menu import send_menu
 from .menu import user_already_register
-from database.config import register_states
+from config.config import register_states
 
 def check_register(update: Update , context: CallbackContext):
     user = update.effective_user
@@ -106,10 +106,9 @@ def set_phone(update: Update, context: CallbackContext):
     return register_states.CONFIRM
 
 
-
-
-
 def save_user(update: Update, context: CallbackContext):
+    
+    
     user_tg = update.effective_user
     data = context.user_data
 

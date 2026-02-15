@@ -1,7 +1,10 @@
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+
 from config.config import config
+from config.database import Base, engine
+
 from apps.start import start
-from apps.
+from apps.register import check_register
 
 Base.metadata.create_all(bind=engine)
 
