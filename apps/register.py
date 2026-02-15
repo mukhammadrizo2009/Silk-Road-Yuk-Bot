@@ -59,7 +59,7 @@ def set_name(update: Update, context: CallbackContext):
 
     update.message.reply_text(
         "Telefon raqamingizni yuboring 📞\n\n"
-        "Iltimos!...Quyidagi tugmani bosgan qolda yuboring!🕹",
+        "Iltimos! - Quyidagi tugmani bosgan qolda yuboring!🕹",
         reply_markup=ReplyKeyboardMarkup(
             [
                 [KeyboardButton("📱 Telefon raqamni yuborish", request_contact=True)]
