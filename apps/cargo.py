@@ -27,7 +27,7 @@ def start_cargo(update: Update, context: CallbackContext):
         "📍 Yuk qayerdan jo'natiladi?",
         reply_markup=reply_markup
     )
-
+    
     return post.FROM
 
 def get_from(update: Update, context: CallbackContext):
@@ -64,12 +64,12 @@ def get_to(update: Update, context: CallbackContext):
     query = update.callback_query
     query.answer()
 
-    # Tanlangan viloyatni saqlaymiz
+
     context.user_data["to"] = query.data
 
     query.edit_message_text(f"📍 Qayerga: {query.data}")
 
-    # Endi foydalanuvchidan yuk turini so'raymiz
+
     query.message.reply_text("📦 Yuk turi (mebel, oziq-ovqat va h.k)?")
 
     return post.TYPE
@@ -87,15 +87,13 @@ def get_weight(update: Update, context: CallbackContext):
     update.message.reply_text("🚛 Transport (misol: Labo)?")
     return post.VOLUME
 
+
 def manual_date(update: Update, context: CallbackContext):
-    """
-    Foydalanuvchi qo'lda sana yozganda ishlaydi.
-    Format: dd.mm.yyyy
-    """
+    
     text = update.message.text.strip()
 
     try:
-        # Sana formatini tekshirish
+        
         from datetime import datetime
         date_obj = datetime.strptime(text, "%d.%m.%Y")
         context.user_data["date"] = date_obj.strftime("%d.%m.%Y")
@@ -107,7 +105,7 @@ def manual_date(update: Update, context: CallbackContext):
         return post.PRICE
 
     except ValueError:
-        # Format noto‘g‘ri bo‘lsa
+        
         update.message.reply_text(
             "❌ Sana noto‘g‘ri formatda. Iltimos quyidagi formatda yozing: dd.mm.yyyy\nMasalan: 25.02.2026"
         )
@@ -181,7 +179,7 @@ def skip_comment(update: Update, context: CallbackContext):
     return finish(update, context)
 
 
-# 🟢 Yakunlash
+
 def finish(update: Update, context: CallbackContext):
 
     message = update.effective_message
