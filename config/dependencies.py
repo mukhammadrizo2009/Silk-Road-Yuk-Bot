@@ -7,8 +7,5 @@ def get_db():
         yield db
     finally:
         db.close()
-
-def get_all_users():
-    with LocalSession() as session:
-        users = session.query(User).all()
-        return users
+        
+        
